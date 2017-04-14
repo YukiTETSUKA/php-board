@@ -32,7 +32,9 @@ class ThreadsController extends BaseClass {
     $retval .= '<tbody>';
     foreach ($this->obtain_threads() as $thread) {
       $retval .= '<tr>';
-      $retval .= "<td>{$thread['name']}</td>";
+      $retval .= '<td>';
+      $retval .= htmlspecialchars($thread['name']);
+      $retval .= '</td>';
       $retval .= "<td>{$thread['created_at']}</td>";
       $retval .= '</tr>';
     }
