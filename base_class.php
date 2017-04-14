@@ -7,7 +7,7 @@ class BaseClass extends stdclass {
   public $body = '';
 
   function __construct() {
-    $this->database = new medoo(json_decode(file_get_contents('config/database.json'), true));
+    $this->database = BaseClass::connect_database();
   }
 
   public static function connect_database() {
