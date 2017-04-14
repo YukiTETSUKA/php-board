@@ -6,12 +6,12 @@ class ThreadsController extends BaseClass {
     $this->title = 'スレッド一覧';
 
     parent::__construct();
-  }
+  } /* end of __construct */
 
   function generate_html() {
     $this->body .= $this->generate_form();
     $this->body .= $this->generate_thread_list();
-  }
+  } /* end of generate_html */
 
   private function generate_form() {
     $retval = '';
@@ -22,7 +22,7 @@ class ThreadsController extends BaseClass {
     $retval .= '</form>';
 
     return $retval;
-  }
+  } /* end of generate_form */
 
   private function generate_thread_list() {
     $retval = '';
@@ -40,12 +40,12 @@ class ThreadsController extends BaseClass {
     $retval .= '</table>';
 
     return $retval;
-  }
+  } /* end of generate_thread_list */
 
   private function obtain_threads() {
     return $this->database->select('threads', '*', array('ORDER' => array('id' => 'DESC')));
-  }
-}
+  } /* end of obtain_threads */
+} /* end of ThreadsController */
 
 $controller = new ThreadsController();
 $controller->generate_html();
