@@ -11,6 +11,7 @@ class ThreadsController extends BaseClass {
   function generate_html() {
     $this->body .= $this->generate_form();
     $this->body .= $this->generate_thread_list();
+    $this->body .= $this->generate_script();
   } /* end of generate_html */
 
   private function generate_form() {
@@ -27,11 +28,11 @@ class ThreadsController extends BaseClass {
   private function generate_thread_list() {
     $retval = '';
 
-    $retval .= '<table class="table table-striped">';
+    $retval .= '<table class="table table-striped table-hover">';
     $retval .= '<thead><tr><th>スレッド名</th><th>作成日時</th></tr></thead>';
     $retval .= '<tbody>';
     foreach ($this->obtain_threads() as $thread) {
-      $retval .= '<tr>';
+      $retval .= "<tr data-href=\"/board/thread.php?id={$thread['id']}\">";
       $retval .= '<td>';
       $retval .= htmlspecialchars($thread['name']);
       $retval .= '</td>';
@@ -43,6 +44,22 @@ class ThreadsController extends BaseClass {
 
     return $retval;
   } /* end of generate_thread_list */
+
+  private function generate_script() {
+    return <<<EOT
+<script>
+  $('tr[data-href]').click(function() {
+    window.location = $(this).attr('data-href');
+  }).find('a').hover(function() {
+    $(this).parents('tr').unbind('click');
+  }, function() {
+    $(this).parents('tr').click(function() {
+      window.location = $(this).attr('data-href');
+    });
+  });
+</script>
+EOT;
+  } /* end of generate_script */
 
   private function obtain_threads() {
     return $this->database->select('threads', '*', array('ORDER' => array('id' => 'DESC')));
