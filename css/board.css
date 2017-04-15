@@ -1,5 +1,9 @@
+#messages {
+  overflow: scroll;
+}
+
 #message-form {
-  position: fixed;
+  position: absolute;
   bottom  : 0px;
   z-index : 9999;
 }

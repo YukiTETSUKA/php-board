@@ -14,15 +14,16 @@ class ThreadController extends BaseClass {
   } /* end of __construct */
 
   function generate_html() {
-    $this->body .= "<h1>{$this->title}</h1>";
+    $this->body .= "<h1 id=\"thread_name\">{$this->title}</h1>";
     $this->body .= $this->generate_message_list();
     $this->body .= $this->generate_form();
+    $this->body .= '<script src="/board/js/thread.js"></script>';
   } /* end of generate_html */
 
   private function generate_message_list() {
     $retval = '';
 
-    $retval .= '<div>';
+    $retval .= '<div id="messages">';
     foreach ($this->messages as $message) {
       $retval .= '<p>';
       $retval .= "<span>{$message['name']} - {$message['created_at']}</span><br />";
@@ -38,8 +39,9 @@ class ThreadController extends BaseClass {
     $retval = '';
 
     $retval .= '<form action="/board/post_message.php" method="post" class="form-inline" id="message-form">';
-    $retval .= '<input type="text" name="name" placeholder="ハンドルネームを入力" class="form-control col-md-2" />';
+    $retval .= '<input type="text" name="name" placeholder="ハンドルネームを入力" class="form-control col-md-2" required />';
     $retval .= '<input type="text" name="body" placeholder="メッセージを入力" class="form-control col-md-8" required />';
+    $retval .= "<input type=\"hidden\" name=\"thread_id\" value=\"{$_GET['id']}\" />";
     $retval .= '<input type="submit" value="メッセージを投稿" class="btn btn-primary btn-sm" />';
     $retval .= '</form>';
 
