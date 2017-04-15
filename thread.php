@@ -14,7 +14,10 @@ class ThreadController extends BaseClass {
   } /* end of __construct */
 
   function generate_html() {
-    $this->body .= "<h1 id=\"thread_name\">{$this->title}</h1>";
+    $this->body .= '<h1 id="thread_name">';
+    $this->body .= htmlspecialchars($this->title);
+    $this->body .= '</h1>';
+
     $this->body .= $this->generate_message_list();
     $this->body .= $this->generate_form();
     $this->body .= '<script src="/board/js/thread.js"></script>';

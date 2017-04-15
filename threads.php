@@ -9,9 +9,10 @@ class ThreadsController extends BaseClass {
   } /* end of __construct */
 
   function generate_html() {
+    $this->body .= "<h1>{$this->title}</h1>";
     $this->body .= $this->generate_form();
     $this->body .= $this->generate_thread_list();
-    $this->body .= $this->generate_script();
+    $this->body .= '<script src="/board/js/threads.js"></script>';
   } /* end of generate_html */
 
   private function generate_form() {
@@ -44,22 +45,6 @@ class ThreadsController extends BaseClass {
 
     return $retval;
   } /* end of generate_thread_list */
-
-  private function generate_script() {
-    return <<<EOT
-<script>
-  $('tr[data-href]').click(function() {
-    window.location = $(this).attr('data-href');
-  }).find('a').hover(function() {
-    $(this).parents('tr').unbind('click');
-  }, function() {
-    $(this).parents('tr').click(function() {
-      window.location = $(this).attr('data-href');
-    });
-  });
-</script>
-EOT;
-  } /* end of generate_script */
 
   private function obtain_threads() {
     return $this->database->select('threads', '*', array('ORDER' => array('id' => 'DESC')));
