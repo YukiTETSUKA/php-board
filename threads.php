@@ -30,14 +30,24 @@ class ThreadsController extends BaseClass {
     $retval = '';
 
     $retval .= '<table class="table table-striped table-hover">';
-    $retval .= '<thead><tr><th>スレッド名</th><th>作成日時</th></tr></thead>';
+    $retval .= '<thead><tr><th>スレッド名</th><th>作成日時</th><th>削除</th></tr></thead>';
     $retval .= '<tbody>';
     foreach ($this->obtain_threads() as $thread) {
       $retval .= "<tr data-href=\"/board/thread.php?id={$thread['id']}\">";
+
       $retval .= '<td>';
       $retval .= htmlspecialchars($thread['name']);
       $retval .= '</td>';
+
       $retval .= "<td>{$thread['created_at']}</td>";
+
+      $retval .= '<td>';
+      $retval .= '<form action="/board/delete_thread.php" method="post">';
+      $retval .= '<input type="submit" value="スレッドを削除する" class="btn btn-danger btn-sm" />';
+      $retval .= "<input type=\"hidden\" name=\"id\" value=\"{$thread['id']}\" />";
+      $retval .= '</form>';
+      $retval .= '</td>';
+
       $retval .= '</tr>';
     }
     $retval .= '</tbody>';
