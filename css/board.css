@@ -2,7 +2,7 @@
   overflow: scroll;
 }
 
-#messages div {
+#messages .message {
   border-top: solid 1px #d3d3d3;
 }
 

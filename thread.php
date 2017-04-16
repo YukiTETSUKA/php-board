@@ -28,15 +28,19 @@ class ThreadController extends BaseClass {
 
     $retval .= '<div id="messages">';
     foreach ($this->messages as $message) {
-      $retval .= '<div>';
+      $retval .= '<div class="message">';
 
       $retval .= "{$message['name']} - {$message['created_at']}<br />";
 
+      $retval .= '<span class="message-body">';
       $retval .= htmlspecialchars($message['body']);
+      $retval .= '</span>';
 
-      $retval .= '<form action="" method="post" class="form-inline">';
+      $retval .= '<button class="btn btn-link btn-sm" onclick="edit_mode(arguments[0]);">編集する</button>';
+
+      $retval .= '<form action="" method="post" class="form-inline hidden">';
       $retval .= '<input type="submit" value="編集する" class="btn btn-link btn-sm" onclick="edit_message();"   />';
-      $retval .= '<input type="submit" value="削除する" class="btn btn-link btn-sm" onclick="delete_message();" />';
+      $retval .= '<input type="submit" value="削除する" class="btn btn-danger btn-sm" onclick="delete_message();" />';
       $retval .= "<input type=\"hidden\" name=\"id\" value=\"{$message['id']}\" />";
       $retval .= '</form>';
 
