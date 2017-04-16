@@ -13,3 +13,19 @@
     <?php print $controller->body ?>
   </body>
 </html>
+
+<?php $uuid = uniqid('uuid_'); ?>
+<script>
+var uuid = localStorage.getItem('g231o021_board_uuid');
+if (uuid == null) {
+  localStorage.setItem('g231o021_board_uuid', '<?php echo $uuid ?>');
+  uuid = localStorage.getItem('g231o021_board_uuid');
+}
+
+$('form').append(
+  $('<input>')
+    .attr('type', 'hidden')
+    .attr('name', 'uuid')
+    .attr('value', uuid)
+);
+</script>
