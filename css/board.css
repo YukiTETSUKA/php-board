@@ -2,6 +2,10 @@
   overflow: scroll;
 }
 
+#messages div {
+  border-top: solid 1px #d3d3d3;
+}
+
 #message-form {
   position: absolute;
   bottom  : 0px;
