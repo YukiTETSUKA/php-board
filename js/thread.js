@@ -2,7 +2,7 @@ $('#messages').height(window.innerHeight - ($('#thread_name').outerHeight(true) 
 
 function edit_mode(e) {
   var message_body = $(e.target).siblings('.message-body').text();
-  $(e.target).siblings('form').prepend(`<input type="text" name="body" value="${message_body}" />`);
+  $(e.target).siblings('form').prepend(`<input type="text" name="body" value="${message_body}" required />`);
 
   $(e.target).addClass('hidden');
   $(e.target).siblings('.message-body').addClass('hidden');
