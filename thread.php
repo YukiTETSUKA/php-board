@@ -18,6 +18,7 @@ class ThreadController extends BaseClass {
     $this->body .= htmlspecialchars($this->title);
     $this->body .= '</h1>';
 
+    $this->body .= '<a href="/board" class="btn btn-link">戻る</a>';
     $this->body .= $this->generate_message_list();
     $this->body .= $this->generate_form();
     $this->body .= '<script src="/board/js/thread.js"></script>';
