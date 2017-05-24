@@ -24,3 +24,5 @@ composer.phar
 .nfs*
 
 # End of https://www.gitignore.io/api/linux,composer
+
+/config/database.json
